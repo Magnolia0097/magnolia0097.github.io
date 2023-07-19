@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Oracle_Linux_Install
+title: Oracle_12C_Linux_Install
 ---
 
 <br>
@@ -132,7 +132,16 @@ source ~/.bash_profile
 ### 오라클 소프트웨어 설치
 
 <br>
-오라클 설치파일 내부에 `response` 라는 디렉토리 안에 들어가서, 3개의 `.rsp` 파일 확인
+
+linux 에 맞는 설치파일 다운 후
+
+파일질라나 `powershell` 의 `scp` 명령어를 통해 가성머신인 vmware 의 내부 서버 
+디렉터리로 옮기고 
+
+`tar xvf 압축파일이름` 또는 `unzip 압축파일이름` 을 통해 설치파일을 내가 원하는 서버속의 디렉터리 안에 압축해제하는 과정은 생략한다
+
+<br>
+압축 해제 된, 오라클 설치파일 내부에 `response` 라는 디렉토리 안에 들어가서, 3개의 `.rsp` 파일 확인
 
 {% highlight linux %}
 cp stage/database/response/*.rsp ~/
@@ -140,7 +149,7 @@ cp stage/database/response/*.rsp ~/
 <br>
 
 - `~/db_install.rsp` 해당 파일을 열고 아래와 같이 값을 찾아 수정한다
-{% highlight js %}
+{% highlight cmd %}
 oracle.install.option=INSTALL_DB_SWONLY
 UNIX_GROUP_NAME=oinstall
 INVENTORY_LOCATION=/opt/oracle12/oraInventory
@@ -163,11 +172,11 @@ DECLINE_SECURITY_UPDATES=true
 
     설치 하기전 테스트
 <br>
-    {% highlight js %}
+    {% highlight cmd %}
 ./runInstaller -silent -executePrereqs -responseFile ~/db_install.rsp
     {% endhighlight %}
 
-    {% highlight js %}
+    {% highlight cmd %}
 테스트 도중 DISPLAY 오류가 뜬다면 다음과 같은 방법으로 해결 가능
 
     su - root
@@ -181,7 +190,7 @@ DECLINE_SECURITY_UPDATES=true
 
     테스트에 문제 없을 경우 설치
 
-{% highlight js %}
+{% highlight cmd %}
 ./runInstaller -waitforcompletion -showProgress -silent -responseFile ~/db_install.rsp
 {% endhighlight %}
 <br>
@@ -189,7 +198,7 @@ DECLINE_SECURITY_UPDATES=true
 - 관리자 로그인 후, 아래의 스크립트 실행
 <br>
 
-{% highlight js %}
+{% highlight cmd %}
 /opt/oracle12/oraInventory/orainstRoot.sh
 
 /opt/oracle12/app/product/12.2.0/dbhome_1/root.sh
@@ -202,20 +211,20 @@ DECLINE_SECURITY_UPDATES=true
 
 <br>
 - `netca.rsp` 내부 값 변경
-{% highlight js %}
+{% highlight cmd %}
 SHOW_GUI=false
 {% endhighlight %}
 <br>
 
 - 실행
 <br>
-{% highlight js %}
+{% highlight cmd %}
 netca /silent /responseFile ~/netca.rsp
 {% endhighlight %}
 <br>
 - 리스너 동작 여부 확인
 <br>
-{% highlight js %}
+{% highlight cmd %}
 lsnrctl status
 {% endhighlight %}
 <br>
@@ -226,7 +235,7 @@ lsnrctl status
 <br>
 - `dbca.rsp` 파일 값 변경
 <br>
-{% highlight js %}
+{% highlight cmd %}
 gdbName=orcl
 sid=orcl
 databaseConfigType=SI
@@ -248,36 +257,36 @@ totalMemory=1024
 {% endhighlight %}
 <br>
 - dbca 실행
-{% highlight js %}
+{% highlight cmd %}
 dbca -silent -createDatabase -responseFile ~/dbca.rsp
 {% endhighlight %}
 <br>
 - 테스트
-{% highlight js %}
+{% highlight cmd %}
 sqlplus / as sysdba
 {% endhighlight %}
 <br>
 - 추가
-{% highlight js %}
+{% highlight cmd %}
 해당 명령어로 database로 이름 확인
 
 select name from v$database;
 {% endhighlight %}
 <br>
-{% highlight js %}
+{% highlight cmd %}
 유저 생성시 주의
 
 create user dba_jc identified by dbajcpassword;
 ORA-65096: 해당 오류가 뜰 경우
 {% endhighlight %}
 <br>
-{% highlight js %}
+{% highlight cmd %}
 해당 명령어로 세션 변경후 다시 시도할것
 
 alter session set "_ORACLE_SCRIPT"=true;
 {% endhighlight %}
 <br>
-{% highlight js %}
+{% highlight cmd %}
 dba_jc 에게 관리자급 권한 부여
 
 grant connect, resource, dba to dba_jc;
@@ -285,3 +294,5 @@ grant connect, resource, dba to dba_jc;
 COMMIT; << 변경 후 적용 필수
 {% endhighlight %}
 <br>
+
+
