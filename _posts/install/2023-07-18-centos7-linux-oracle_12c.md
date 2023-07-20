@@ -284,6 +284,7 @@ ORA-65096: 해당 오류가 뜰 경우
 해당 명령어로 세션 변경후 다시 시도할것
 
 alter session set "_ORACLE_SCRIPT"=true;
+! 변경된 세션은 다음 접속때 초기화된다.. 또 해당 명령어를 입력해야 함 ! 
 {% endhighlight %}
 <br>
 {% highlight cmd %}
@@ -291,7 +292,9 @@ dba_jc 에게 관리자급 권한 부여
 
 grant connect, resource, dba to dba_jc;
 
-COMMIT; << 변경 후 적용 필수
+COMMIT; << 변경 후 적용
+
+
 {% endhighlight %}
 <br>
 
