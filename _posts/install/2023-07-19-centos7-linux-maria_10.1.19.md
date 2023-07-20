@@ -328,3 +328,8 @@ show tables;
 {% endhighlight %}
 
 <br>
+
+데이터베이스에 존재하는 모든 데이터의 수
+{% highlight cmd %}
+SELECT SUM(TABLE_ROWS) AS total_records FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'employees';
+{% endhighlight %}
