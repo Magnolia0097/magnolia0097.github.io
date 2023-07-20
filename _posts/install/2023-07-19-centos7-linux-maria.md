@@ -180,7 +180,7 @@ mysql_install_db --user=mysql --basedir=/home/bmt/mysql --datadir=/home/bmt/mysq
 {% highlight cmd %}
 ./mysql.server start
 
-해당 명령어로 DB 기동, 물론 `mysql.server` 이라는 파일이 있는곳에서 해당 명령어를 입력 해야한다
+해당 명령어로 DB 기동, 물론 `mysql.server` 이라는 파일이 있는곳에서 해당 명령어를 입력 해야한다 (/support-files)
 {% endhighlight %}
 <br>
 
