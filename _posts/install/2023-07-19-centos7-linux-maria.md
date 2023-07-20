@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Maria_8.0_Linux_Install
+title: Maria_10.1.19_Linux_Install
 ---
-Maria 의 버전은 8.0
+Maria 의 버전은 10.1.19
 
 <br>
 
