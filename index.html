@@ -19,7 +19,7 @@ title: Home
   {% endfor %}
 </div>
 
-<div class="pagination">
+<!-- <div class="pagination">
   {% if paginator.next_page %}
     <a class="pagination-item older" href="{{ paginator.next_page_path | absolute_url }}">Older</a>
   {% else %}
@@ -34,4 +34,13 @@ title: Home
   {% else %}
     <span class="pagination-item newer">Newer</span>
   {% endif %}
+</div> -->
+<div class="container">
+  <a href="/side/install.html">
+    <h3>설치</h3>
+  </a>
+
+  <a href="/side/setting.html">
+    <h3>설정</h3>
+  </a>
 </div>
