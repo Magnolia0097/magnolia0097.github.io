@@ -9,6 +9,7 @@ title: 설치
 
 * [Oracle](/install/Oracle.html)
 * [Maria](/install/Maria.html)
+* [Tibero](/install/Tibero.html)
 
 <br>
 
