@@ -11,8 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const storedPrompts = localStorage.getItem(localStorageKey);
     if (storedPrompts) {
       prompts = JSON.parse(storedPrompts);
-      renderPrompts();
     }
+    renderPrompts(); // Always render, even if empty, to ensure UI consistency
   }
 
   // Save prompts to localStorage
@@ -23,11 +23,36 @@ document.addEventListener('DOMContentLoaded', () => {
   // Render prompts in the UI
   function renderPrompts() {
     promptList.innerHTML = ''; // Clear existing list items
-    prompts.forEach(promptText => {
+    prompts.forEach((promptText, index) => {
       const listItem = document.createElement('li');
       listItem.textContent = promptText;
+
+      const deleteButton = document.createElement('button');
+      deleteButton.textContent = '삭제';
+      deleteButton.className = 'btn btn-delete'; // Added classes
+      // deleteButton.style.marginLeft = '10px'; // Margin will be handled by CSS .btn or #prompt-list li .btn-delete
+      deleteButton.setAttribute('data-index', index);
+
+      deleteButton.addEventListener('click', function() {
+        // 'this' refers to the button clicked
+        const promptIndex = parseInt(this.getAttribute('data-index'), 10);
+        deletePrompt(promptIndex);
+      });
+
+      listItem.appendChild(deleteButton);
       promptList.appendChild(listItem);
     });
+  }
+
+  // Delete prompt by index
+  function deletePrompt(index) {
+    if (index >= 0 && index < prompts.length) {
+      prompts.splice(index, 1); // Remove the item from the array
+      savePrompts();          // Update localStorage
+      renderPrompts();        // Re-render the list
+    } else {
+      console.error('Invalid index for deletePrompt:', index);
+    }
   }
 
   // Add new prompt
@@ -44,5 +69,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initial load
   loadPrompts();
-  console.log("ai_prompt.js loaded, DOM ready, localStorage handled.");
+  console.log("ai_prompt.js loaded, DOM ready, localStorage and delete functionality handled.");
 });
