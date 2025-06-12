@@ -20,20 +20,7 @@
     {% assign ai_prompt_node = nil %}
     {% assign ai_prompt_rendered = false %}
 
-    {% comment %} Capture AI Prompt node first {% endcomment %}
-    {% for node_capture in pages_list %}
-      {% if node_capture.title == "AI 프롬프트" and node_capture.layout == "page" %}
-        {% assign ai_prompt_node = node_capture %}
-        {% break %}
-      {% endif %}
-    {% endfor %}
 
-    {% for node in pages_list %}
-      {% if node.title != null and node.layout == "page" %}
-        {% if node.title == "AI 프롬프트" %}
-          {% comment %} Don't render AI Prompt here, will be handled with/after 설정 or at the end {% endcomment %}
-          {% continue %}
-        {% endif %}
 
         <a class="sidebar-nav-item{% if page.url == node.url %} active{% endif %}" href="{{ node.url | absolute_url }}">{{ node.title }}</a>
 
