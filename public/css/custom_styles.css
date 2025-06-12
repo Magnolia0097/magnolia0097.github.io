@@ -1,0 +1,64 @@
+/* General Button Styling */
+.btn {
+    padding: 8px 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    color: #333;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+    margin-left: 5px; /* For spacing if buttons are next to each other */
+}
+
+.btn:hover {
+    background-color: #eee;
+    border-color: #bbb;
+}
+
+.btn:active {
+    background-color: #ddd;
+}
+
+/* Specific styling for Add button (optional, if different look is needed) */
+.btn-add {
+    background-color: #5cb85c; /* A common 'success' or 'add' color */
+    color: white;
+    border-color: #4cae4c;
+}
+
+.btn-add:hover {
+    background-color: #4cae4c;
+    border-color: #45a045;
+}
+
+.btn-add:active {
+    background-color: #45a045;
+}
+
+/* Specific styling for Delete button */
+.btn-delete {
+    background-color: #d9534f; /* A common 'danger' or 'delete' color */
+    color: white;
+    border-color: #d43f3a;
+}
+
+.btn-delete:hover {
+    background-color: #d43f3a;
+    border-color: #c9302c;
+}
+
+.btn-delete:active {
+    background-color: #c9302c;
+}
+
+/* Ensure buttons within list items are vertically aligned if needed */
+#prompt-list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+#prompt-list li .btn-delete {
+    margin-left: auto; /* Pushes delete button to the far right */
+}
