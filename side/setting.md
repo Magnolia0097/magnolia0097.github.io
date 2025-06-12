@@ -8,6 +8,7 @@ title: 설정
 ### Linux firewall 설정
 
 * [방화벽 포트 개방](/2023/07/19/linux-firewall)
+* test page
 
 ### Linux HostName 설정
 
